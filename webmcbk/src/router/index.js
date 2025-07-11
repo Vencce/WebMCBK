@@ -15,10 +15,35 @@ const router = createRouter({
       component: () => import('../views/EscolhaView.vue'),
     },
     {
-    path: '/menu',
-    name: 'menu',
-    component: () => import('../views/MenuView.vue'),
+      path: '/menu',
+      name: 'menu',
+      component: () => import('../views/MenuView.vue'),
     },
+    {
+      path: '/humburger',
+      name: 'humburger',
+      component: () => import('../views/Cardapio/HumburgerView.vue'),
+    },
+    {
+      path: '/batata',
+      name: 'batata',
+      component: () => import('../views/Cardapio/BatataView.vue'),
+    },
+    {
+      path: '/cachorro',
+      name: 'cachorro',
+      component: () => import('../views/Cardapio/CachorroView.vue'),
+    },
+    {
+      path: '/bebida',
+      name: 'bebida',
+      component: () => import('../views/Cardapio/BebidaView.vue'),
+    },
+    {
+      path: '/sobremesa',
+      name: 'sobremesa',
+      component: () => import('../views/Cardapio/SobremesaView.vue'),
+    }
   ],
 })
 

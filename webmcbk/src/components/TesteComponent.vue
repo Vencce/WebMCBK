@@ -8,7 +8,7 @@
 
 <style scoped>
 main {
-  background-color: white;
+  background-color: rgb(0, 0, 0);
   position: absolute;
   bottom: 0;
   width: 100%;

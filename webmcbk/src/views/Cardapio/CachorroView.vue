@@ -5,9 +5,7 @@ import { RouterLink } from 'vue-router'
 <template>
   <div class="tela-totem">
     <aside class="barra-lateral">
-      <RouterLink to="/menu">
-        <img class="logo" src="/imagens/mcbk.png" alt="Logo" />
-      </RouterLink>
+      <img class="logo" src="/imagens/mcbk.png" alt="Logo" />
 
       <nav class="icones-menu">
         <RouterLink to="/humburger" class="icone ativo">
@@ -82,7 +80,7 @@ import { RouterLink } from 'vue-router'
 }
 
 .icone img {
-  width: 100px;
+  width: 120px;
   transition: transform 0.3s;
 }
 
