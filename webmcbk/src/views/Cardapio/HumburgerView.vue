@@ -94,7 +94,7 @@ import { RouterLink } from 'vue-router'
   flex-direction: row;
   overflow: hidden;
   background-color: #fff;
-  display: block; /* não precisa mais de flex aqui */
+  display: block;
 }
 
 /* Barra lateral esquerda */
@@ -144,10 +144,10 @@ import { RouterLink } from 'vue-router'
 
 /* Área principal */
 .conteudo {
-  margin-left: 170px; /* mesma largura da barra lateral */
+  margin-left: 170px;
   padding: 2rem;
   overflow-y: auto;
-  padding-bottom: 140px; /* espaço pro rodapé */
+  padding-bottom: 140px;
 }
 
 .titulo {
@@ -208,7 +208,7 @@ import { RouterLink } from 'vue-router'
   display: flex;
   align-items: center;
   justify-content: center;
-  z-index: 2000; /* >>> adiciona essa linha */
+  z-index: 2000;
 }
 
 .resumo-pedido {

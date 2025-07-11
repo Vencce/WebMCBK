@@ -82,7 +82,7 @@ import { RouterLink } from 'vue-router'
 }
 
 .icone img {
-  width: 100px;
+  width: 120px;
   transition: transform 0.3s;
 }
 
