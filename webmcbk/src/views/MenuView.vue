@@ -1,5 +1,8 @@
 <script setup>
 import { RouterLink } from 'vue-router'
+import { useCartStore } from '@/stores/carinho'
+
+const cartStore = useCartStore()
 </script>
 
 <template>
@@ -11,19 +14,19 @@ import { RouterLink } from 'vue-router'
 
       <nav class="icones-menu">
         <RouterLink to="/humburger" class="icone ativo">
-          <img src="/humburger/humb.png" />
+          <img src="/menulateral/humb.png" />
         </RouterLink>
         <RouterLink to="/batata" class="icone ativo">
-          <img src="/humburger/batata.png" />
+          <img src="/menulateral/batata.png" />
         </RouterLink>
         <RouterLink to="/cachorro" class="icone ativo">
-          <img src="/humburger/hotdog.png" />
+          <img src="/menulateral/hotdog.png" />
         </RouterLink>
         <RouterLink to="/bebida" class="icone ativo">
-          <img src="/humburger/coce.png" />
+          <img src="/menulateral/coce.png" />
         </RouterLink>
         <RouterLink to="/sobremesa" class="icone ativo">
-          <img src="/humburger/sundy.png" />
+          <img src="/menulateral/sundy.png" />
         </RouterLink>
       </nav>
     </aside>
@@ -42,9 +45,15 @@ import { RouterLink } from 'vue-router'
       </div>
     </main>
 
-    <!-- Rodapé -->
     <footer class="rodape">
-      <p>Teste</p>
+      <div class="resumo-pedido">
+        <span><strong>Total:</strong> R$ {{ cartStore.cart.total.toFixed(2) }}</span>
+        <span class="divisor">|</span>
+        <span><strong>Itens:</strong> {{ cartStore.totalItems }}</span>
+        <RouterLink to="/pedido" class="pedido">
+          <p>Ver meu pedido</p>
+        </RouterLink>
+      </div>
     </footer>
   </div>
 </template>
@@ -61,7 +70,7 @@ import { RouterLink } from 'vue-router'
 
 /* Barra lateral esquerda */
 .barra-lateral {
-  width: 170px;
+  width: 26%;
   background-color: white;
   display: flex;
   flex-direction: column;
@@ -128,5 +137,41 @@ import { RouterLink } from 'vue-router'
   display: flex;
   align-items: center;
   justify-content: center;
+  z-index: 2000;
+  padding: 1rem;
+}
+
+.resumo-pedido {
+  width: 100%;
+  padding: 1rem;
+  border: 2px solid white;
+  border-radius: 12px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 1.5rem;
+  background-color: transparent;
+  color: white;
+  gap: 1rem;
+  box-sizing: border-box;
+}
+
+.resumo-pedido .divisor {
+  color: #bbb;
+}
+
+.ver-pedido {
+  color: #2ecc71;
+  font-weight: bold;
+  text-decoration: none;
+  margin-left: auto;
+}
+
+.ver-pedido:hover {
+  text-decoration: underline;
+}
+
+.pedido {
+  color: white;
 }
 </style>

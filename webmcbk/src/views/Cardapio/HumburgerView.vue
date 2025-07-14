@@ -1,5 +1,10 @@
 <script setup>
 import { RouterLink } from 'vue-router'
+import { useProductStore } from '../../stores/produtos'
+import { useCartStore } from '../../stores/carinho'
+
+const productsStore = useProductStore()
+const cartStore = useCartStore()
 </script>
 
 <template>
@@ -11,76 +16,47 @@ import { RouterLink } from 'vue-router'
 
       <nav class="icones-menu">
         <RouterLink to="/humburger" class="icone ativo">
-          <img src="/humburger/humb.png" />
+          <img src="/menulateral/humb.png" />
         </RouterLink>
         <RouterLink to="/batata" class="icone ativo">
-          <img src="/humburger/batata.png" />
+          <img src="/menulateral/batata.png" />
         </RouterLink>
         <RouterLink to="/cachorro" class="icone ativo">
-          <img src="/humburger/hotdog.png" />
+          <img src="/menulateral/hotdog.png" />
         </RouterLink>
         <RouterLink to="/bebida" class="icone ativo">
-          <img src="/humburger/coce.png" />
+          <img src="/menulateral/coce.png" />
         </RouterLink>
         <RouterLink to="/sobremesa" class="icone ativo">
-          <img src="/humburger/sundy.png" />
+          <img src="/menulateral/sundy.png" />
         </RouterLink>
       </nav>
     </aside>
 
     <main class="conteudo">
       <h1 class="titulo">HAMBURGERS</h1>
-      <div class="grid-produtos">
-        <div class="produto">
-          <img src="/humburger/humb.png" />
-          <p class="nome">Hambúrguer simples</p>
-          <p class="preco">R$ 5,00</p>
-        </div>
-        <div class="produto">
-          <img src="/humburger/humb.png" />
-          <p class="nome">Hambúrguer simples</p>
-          <p class="preco">R$ 5,00</p>
-        </div>
-        <div class="produto">
-          <img src="/humburger/humb.png" />
-          <p class="nome">Hambúrguer simples</p>
-          <p class="preco">R$ 5,00</p>
-        </div>
-        <div class="produto">
-          <img src="/humburger/humb.png" />
-          <p class="nome">Hambúrguer simples</p>
-          <p class="preco">R$ 5,00</p>
-        </div>
-        <div class="produto">
-          <img src="/humburger/humb.png" />
-          <p class="nome">Hambúrguer simples</p>
-          <p class="preco">R$ 5,00</p>
-        </div>
-        <div class="produto">
-          <img src="/humburger/humb.png" />
-          <p class="nome">Hambúrguer simples</p>
-          <p class="preco">R$ 5,00</p>
-        </div>
-        <div class="produto">
-          <img src="/humburger/humb.png" />
-          <p class="nome">Hambúrguer simples</p>
-          <p class="preco">R$ 5,00</p>
-        </div>
-        <div class="produto">
-          <img src="/humburger/humb.png" />
-          <p class="nome">Hambúrguer simples</p>
-          <p class="preco">R$ 5,00</p>
-        </div>
-      </div>
+      <ul class="grid-produtos">
+        <li
+          v-for="item in productsStore.hamburgers"
+          :key="item.id"
+          class="produto"
+          @click="cartStore.addToCart(item)"
+        >
+          <img :src="item.cover" />
+          <p class="nome">{{ item.title }}</p>
+          <p class="preco">R$ {{ item.price }}</p>
+        </li>
+      </ul>
     </main>
 
-    <!-- Rodapé -->
     <footer class="rodape">
       <div class="resumo-pedido">
-        <span><strong>Total:</strong> R$ 0,01</span>
+        <span><strong>Total:</strong> R$ {{ cartStore.cart.total.toFixed(2) }}</span>
         <span class="divisor">|</span>
-        <span><strong>Itens:</strong> 1</span>
-        <p>Ver meu pedido &gt;&gt;</p>
+        <span><strong>Itens:</strong> {{ cartStore.totalItems }}</span>
+        <RouterLink to="/pedido" class="pedido">
+          <p>Ver meu pedido</p>
+        </RouterLink>
       </div>
     </footer>
   </div>
@@ -165,6 +141,8 @@ import { RouterLink } from 'vue-router'
 }
 
 .grid-produtos {
+  list-style: none;
+  padding: 0;
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 2rem;
@@ -209,20 +187,22 @@ import { RouterLink } from 'vue-router'
   align-items: center;
   justify-content: center;
   z-index: 2000;
+  padding: 1rem;
 }
 
 .resumo-pedido {
-  width: 90%;
-  max-width: 400px;
+  width: 100%;
   padding: 1rem;
-  border: 2px solid #d7e4dc;
+  border: 2px solid white;
   border-radius: 12px;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  font-size: 1.2rem;
+  font-size: 1.5rem;
+  background-color: transparent;
   color: white;
-  flex-wrap: wrap;
+  gap: 1rem;
+  box-sizing: border-box;
 }
 
 .resumo-pedido .divisor {
@@ -238,5 +218,9 @@ import { RouterLink } from 'vue-router'
 
 .ver-pedido:hover {
   text-decoration: underline;
+}
+
+.pedido {
+  color: white;
 }
 </style>

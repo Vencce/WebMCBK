@@ -43,7 +43,12 @@ const router = createRouter({
       path: '/sobremesa',
       name: 'sobremesa',
       component: () => import('../views/Cardapio/SobremesaView.vue'),
-    }
+    },
+    {
+      path: '/pedido',
+      name: 'pedido',
+      component: () => import('../views/CartView.vue'),
+    },
   ],
 })
 
