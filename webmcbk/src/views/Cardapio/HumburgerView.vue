@@ -1,10 +1,24 @@
 <script setup>
-import { RouterLink } from 'vue-router'
-import { useProductStore } from '../../stores/produtos'
-import { useCartStore } from '../../stores/carinho'
+import { ref } from 'vue'
+import { useProductStore } from '@/stores/produtos'
+import { useCartStore } from '@/stores/carinho'
+import ProductModal from '@/components/ProductModal.vue'
 
 const productsStore = useProductStore()
 const cartStore = useCartStore()
+
+const produtoSelecionado = ref(null)
+const mostrarModal = ref(false)
+
+function abrirModal(produto) {
+  produtoSelecionado.value = produto
+  mostrarModal.value = true
+}
+
+function adicionarAoCarrinho(produto) {
+  cartStore.addToCart(produto)
+  mostrarModal.value = false
+}
 </script>
 
 <template>
@@ -40,12 +54,19 @@ const cartStore = useCartStore()
           v-for="item in productsStore.hamburgers"
           :key="item.id"
           class="produto"
-          @click="cartStore.addToCart(item)"
+          @click="abrirModal(item)"
         >
           <img :src="item.cover" />
           <p class="nome">{{ item.title }}</p>
           <p class="preco">R$ {{ item.price }}</p>
         </li>
+
+        <ProductModal
+          v-if="mostrarModal"
+          :produto="produtoSelecionado"
+          @fechar="mostrarModal = false"
+          @adicionar="adicionarAoCarrinho"
+        />
       </ul>
     </main>
 

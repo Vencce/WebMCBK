@@ -15,7 +15,6 @@ export const useCartStore = defineStore('cart', () => {
       cart.value.items.push({ ...product, quantity: 1 })
     }
     cart.value.total += product.price
-    alert(`Adicionado ${product.title} ao carrinho!`)
   }
 
   function decrementProductToCart(product) {

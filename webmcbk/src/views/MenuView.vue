@@ -33,15 +33,13 @@ const cartStore = useCartStore()
 
     <main class="conteudo">
       <h1 class="titulo">SOBRE NÓS</h1>
-      <div class="grid-produtos">
-        <div>
-          <img class="loja" src="/imagens/fora.jpeg" alt="" />
-          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quod, voluptates.</p>
-        </div>
-        <div>
-          <img class="loja" src="/imagens/dentro.png" alt="" />
-          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quod, voluptates.</p>
-        </div>
+      <div>
+        <img class="fora" src="/imagens/fora.jpeg" alt="">
+        <p>Aqui você encontra o melhor hamburguer da cidade!</p>
+      </div>
+      <div>
+        <img class="fora" src="/imagens/dentro.png" alt="">
+        <p>Nossos hamburguers são feitos com ingredientes de qualidade</p>
       </div>
     </main>
 
@@ -62,21 +60,29 @@ const cartStore = useCartStore()
 /* Estrutura principal */
 .tela-totem {
   display: flex;
-  height: 100vh;
+  height: 100%;
   flex-direction: row;
   overflow: hidden;
   background-color: #fff;
+  display: block;
 }
 
 /* Barra lateral esquerda */
 .barra-lateral {
-  width: 26%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  width: 170px;
   background-color: white;
   display: flex;
   flex-direction: column;
   align-items: center;
   padding: 1rem 0;
   border-right: 2px solid #e0e0e0;
+  z-index: 1000;
+  overflow-y: auto;
+  padding-bottom: 120px;
 }
 
 .logo {
@@ -101,31 +107,36 @@ const cartStore = useCartStore()
   border-radius: 8px;
 }
 
-.grid-produtos p {
+.grid-produtos p.nome {
   color: black;
   font-size: 1.5rem;
 }
 
 /* Área principal */
 .conteudo {
-  flex: 1;
+  margin-left: 170px;
   padding: 2rem;
   overflow-y: auto;
+  padding-bottom: 140px;
+}
+
+.conteudo p {
+  color: black;
+  font-size: 1.5rem;
 }
 
 .titulo {
   font-size: 3rem;
   font-weight: bold;
   margin-top: 2rem;
+  margin-bottom: 2rem;
   color: black;
   text-align: center;
 }
 
-.loja {
+.fora {
   width: 100%;
-  padding-top: 3rem;
 }
-
 /* Rodapé */
 .rodape {
   position: fixed;

@@ -95,6 +95,10 @@ const mostrarQR = ref(false)
   font-size: 1.5rem;
   justify-content: space-between;
 }
+.titulo-valor img {
+  width: 120px;
+  height: auto;
+}
 .acoes-item {
   display: flex;
   justify-content: space-between;

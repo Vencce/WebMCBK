@@ -37,7 +37,7 @@ const cartStore = useCartStore()
       <h1 class="titulo">BATATAS</h1>
       <ul class="grid-produtos">
         <li
-          v-for="item in productsStore.hamburgers"
+          v-for="item in productsStore.batatas"
           :key="item.id"
           class="produto"
           @click="cartStore.addToCart(item)"

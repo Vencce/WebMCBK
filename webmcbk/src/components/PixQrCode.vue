@@ -73,7 +73,8 @@ onMounted(() => {
 <style scoped>
 .pix-container {
   text-align: center;
-  margin-top: 2rem;
+  margin-top: 1rem;
+  padding-bottom: 2.5rem;
 }
 img {
   border: 2px solid #ccc;

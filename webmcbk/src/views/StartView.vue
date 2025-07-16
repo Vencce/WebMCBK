@@ -33,7 +33,7 @@ p {
   font-size: 2.5rem;
   color: #e6917c;
   line-height: 1;
-  margin: 0 auto 3rem auto;
+  margin: 5rem auto 3rem auto;
   text-align: center;
   max-width: 60%;
 }

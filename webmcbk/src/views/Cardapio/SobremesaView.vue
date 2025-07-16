@@ -1,48 +1,63 @@
 <script setup>
 import { RouterLink } from 'vue-router'
+import { useProductStore } from '../../stores/produtos'
+import { useCartStore } from '../../stores/carinho'
+
+const productsStore = useProductStore()
+const cartStore = useCartStore()
 </script>
 
 <template>
   <div class="tela-totem">
     <aside class="barra-lateral">
-      <img class="logo" src="/imagens/mcbk.png" alt="Logo" />
+      <RouterLink to="/menu">
+        <img class="logo" src="/imagens/mcbk.png" alt="Logo" />
+      </RouterLink>
 
       <nav class="icones-menu">
         <RouterLink to="/humburger" class="icone ativo">
-          <img src="/humburger/humb.png" />
+          <img src="/menulateral/humb.png" />
         </RouterLink>
         <RouterLink to="/batata" class="icone ativo">
-          <img src="/humburger/batata.png" />
+          <img src="/menulateral/batata.png" />
         </RouterLink>
         <RouterLink to="/cachorro" class="icone ativo">
-          <img src="/humburger/hotdog.png" />
+          <img src="/menulateral/hotdog.png" />
         </RouterLink>
         <RouterLink to="/bebida" class="icone ativo">
-          <img src="/humburger/coce.png" />
+          <img src="/menulateral/coce.png" />
         </RouterLink>
         <RouterLink to="/sobremesa" class="icone ativo">
-          <img src="/humburger/sundy.png" />
+          <img src="/menulateral/sundy.png" />
         </RouterLink>
       </nav>
     </aside>
 
     <main class="conteudo">
-      <h1 class="titulo">SOBRE NÓS</h1>
-      <div class="grid-produtos">
-        <div>
-          <img class="loja" src="/imagens/fora.jpeg" alt="" />
-          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quod, voluptates.</p>
-        </div>
-        <div>
-          <img class="loja" src="/imagens/dentro.png" alt="" />
-          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quod, voluptates.</p>
-        </div>
-      </div>
+      <h1 class="titulo">HOT DOGS</h1>
+      <ul class="grid-produtos">
+        <li
+          v-for="item in productsStore.sobremesas"
+          :key="item.id"
+          class="produto"
+          @click="cartStore.addToCart(item)"
+        >
+          <img :src="item.cover" />
+          <p class="nome">{{ item.title }}</p>
+          <p class="preco">R$ {{ item.price }}</p>
+        </li>
+      </ul>
     </main>
 
-    <!-- Rodapé -->
     <footer class="rodape">
-      <p>Teste</p>
+      <div class="resumo-pedido">
+        <span><strong>Total:</strong> R$ {{ cartStore.cart.total.toFixed(2) }}</span>
+        <span class="divisor">|</span>
+        <span><strong>Itens:</strong> {{ cartStore.totalItems }}</span>
+        <RouterLink to="/pedido" class="pedido">
+          <p>Ver meu pedido</p>
+        </RouterLink>
+      </div>
     </footer>
   </div>
 </template>
@@ -51,14 +66,19 @@ import { RouterLink } from 'vue-router'
 /* Estrutura principal */
 .tela-totem {
   display: flex;
-  height: 100vh;
+  height: 100%;
   flex-direction: row;
   overflow: hidden;
   background-color: #fff;
+  display: block;
 }
 
 /* Barra lateral esquerda */
 .barra-lateral {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100vh;
   width: 170px;
   background-color: white;
   display: flex;
@@ -66,6 +86,9 @@ import { RouterLink } from 'vue-router'
   align-items: center;
   padding: 1rem 0;
   border-right: 2px solid #e0e0e0;
+  z-index: 1000;
+  overflow-y: auto;
+  padding-bottom: 120px;
 }
 
 .logo {
@@ -90,22 +113,24 @@ import { RouterLink } from 'vue-router'
   border-radius: 8px;
 }
 
-.grid-produtos p {
+.grid-produtos p.nome {
   color: black;
   font-size: 1.5rem;
 }
 
 /* Área principal */
 .conteudo {
-  flex: 1;
+  margin-left: 170px;
   padding: 2rem;
   overflow-y: auto;
+  padding-bottom: 140px;
 }
 
 .titulo {
   font-size: 3rem;
   font-weight: bold;
   margin-top: 2rem;
+  margin-bottom: 2rem;
   color: black;
   text-align: center;
 }
@@ -113,6 +138,41 @@ import { RouterLink } from 'vue-router'
 .loja {
   width: 100%;
   padding-top: 3rem;
+}
+
+.grid-produtos {
+  list-style: none;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 2rem;
+  height: 100%;
+}
+
+.produto {
+  text-align: center;
+  border: 1px solid #ccc;
+  border-radius: 20px;
+  padding: 0.5rem;
+  background-color: #f5f5f5;
+}
+
+.produto img {
+  width: 120px;
+  height: auto;
+}
+
+.produto.vazio {
+  background-color: #f5f5f5;
+  border: 1px dashed #ccc;
+  height: 140px;
+}
+
+.preco {
+  color: green;
+  font-weight: bold;
+  font-size: 1.5rem;
+  text-align: end;
 }
 
 /* Rodapé */
@@ -126,5 +186,41 @@ import { RouterLink } from 'vue-router'
   display: flex;
   align-items: center;
   justify-content: center;
+  z-index: 2000;
+  padding: 1rem;
+}
+
+.resumo-pedido {
+  width: 100%;
+  padding: 1rem;
+  border: 2px solid white;
+  border-radius: 12px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 1.5rem;
+  background-color: transparent;
+  color: white;
+  gap: 1rem;
+  box-sizing: border-box;
+}
+
+.resumo-pedido .divisor {
+  color: #bbb;
+}
+
+.ver-pedido {
+  color: #2ecc71;
+  font-weight: bold;
+  text-decoration: none;
+  margin-left: auto;
+}
+
+.ver-pedido:hover {
+  text-decoration: underline;
+}
+
+.pedido {
+  color: white;
 }
 </style>
