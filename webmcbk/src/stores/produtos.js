@@ -160,7 +160,7 @@ export const useProductStore = defineStore('products', () => {
   const sobremesas = ref([
     {
       id: 22,
-      title: 'Casquinha Clássica Burger Donald’s',
+      title: 'Casquinha Clássica  McBk',
       cover: '/sobremesa/1.png',
       description: 'Sorvete de baunilha cremoso servido em casquinha crocante.',
       price: 3.5,

@@ -56,7 +56,9 @@ function adicionarAoCarrinho(produto) {
           class="produto"
           @click="abrirModal(item)"
         >
-          <img :src="item.cover" />
+          <p class="id">
+            <img :src="item.cover" />
+          </p>
           <p class="nome">{{ item.title }}</p>
           <p class="preco">R$ {{ item.price }}</p>
         </li>
