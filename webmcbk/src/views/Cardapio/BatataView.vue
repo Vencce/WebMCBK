@@ -99,7 +99,7 @@ function adicionarAoCarrinho(produto) {
   top: 0;
   left: 0;
   height: 100vh;
-  width: 23%;
+  width: 170px;
   background-color: white;
   display: flex;
   flex-direction: column;
