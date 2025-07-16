@@ -2,7 +2,7 @@
 
 #app {
   min-height: 100vh;
-  max-width: 1200px;
+  width: 100%;
   margin: 0 auto;
   font-weight: normal;
   background-color: white;
@@ -25,10 +25,5 @@ a,
   body {
     display: flex;
     place-items: center;
-  }
-
-  #app {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
   }
 }
