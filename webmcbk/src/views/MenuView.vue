@@ -73,7 +73,7 @@ const cartStore = useCartStore()
   top: 0;
   left: 0;
   height: 100vh;
-  width: 170px;
+  width: 23%;
   background-color: white;
   display: flex;
   flex-direction: column;
