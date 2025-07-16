@@ -73,7 +73,7 @@ main .escolha {
 }
 
 img {
-  height: 40%;
-  width: 40%;
+  width: 10rem;
+  height: 10rem;
 }
 </style>
