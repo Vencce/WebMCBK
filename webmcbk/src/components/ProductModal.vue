@@ -78,6 +78,7 @@ function adicionarAoCarrinho() {
 
 .descricao {
   color: #333;
+  font-size: 1.2rem;
   margin: 1rem 0;
 }
 

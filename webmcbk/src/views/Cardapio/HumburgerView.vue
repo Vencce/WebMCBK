@@ -29,7 +29,7 @@ function adicionarAoCarrinho(produto) {
       </RouterLink>
 
       <nav class="icones-menu">
-        <RouterLink to="/humburger" class="icone ativo">
+        <RouterLink to="/humburger" class="icone local">
           <img src="/menulateral/humb.png" />
         </RouterLink>
         <RouterLink to="/batata" class="icone ativo">
@@ -60,7 +60,6 @@ function adicionarAoCarrinho(produto) {
           <p class="nome">{{ item.title }}</p>
           <p class="preco">R$ {{ item.price }}</p>
         </li>
-
         <ProductModal
           v-if="mostrarModal"
           :produto="produtoSelecionado"
@@ -128,8 +127,14 @@ function adicionarAoCarrinho(produto) {
   transition: transform 0.3s;
 }
 
-.icone.ativo {
+.icone.local{
   background-color: #e94444;
+  padding: 0.5rem;
+  border-radius: 8px;
+}
+
+.icone.ativo {
+  background-color: #d6cece;
   padding: 0.5rem;
   border-radius: 8px;
 }

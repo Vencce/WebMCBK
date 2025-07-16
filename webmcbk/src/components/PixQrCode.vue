@@ -76,6 +76,11 @@ onMounted(() => {
   margin-top: 1rem;
   padding-bottom: 2.5rem;
 }
+
+h3 {
+  color: black;
+}
+
 img {
   border: 2px solid #ccc;
   border-radius: 12px;

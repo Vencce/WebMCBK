@@ -102,7 +102,7 @@ const cartStore = useCartStore()
 }
 
 .icone.ativo {
-  background-color: #e94444;
+  background-color: #d6cece;
   padding: 0.5rem;
   border-radius: 8px;
 }

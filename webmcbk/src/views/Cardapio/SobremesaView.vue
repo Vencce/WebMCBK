@@ -1,10 +1,24 @@
 <script setup>
-import { RouterLink } from 'vue-router'
-import { useProductStore } from '../../stores/produtos'
-import { useCartStore } from '../../stores/carinho'
+import { ref } from 'vue'
+import { useProductStore } from '@/stores/produtos'
+import { useCartStore } from '@/stores/carinho'
+import ProductModal from '@/components/ProductModal.vue'
 
 const productsStore = useProductStore()
 const cartStore = useCartStore()
+
+const produtoSelecionado = ref(null)
+const mostrarModal = ref(false)
+
+function abrirModal(produto) {
+  produtoSelecionado.value = produto
+  mostrarModal.value = true
+}
+
+function adicionarAoCarrinho(produto) {
+  cartStore.addToCart(produto)
+  mostrarModal.value = false
+}
 </script>
 
 <template>
@@ -27,25 +41,31 @@ const cartStore = useCartStore()
         <RouterLink to="/bebida" class="icone ativo">
           <img src="/menulateral/coce.png" />
         </RouterLink>
-        <RouterLink to="/sobremesa" class="icone ativo">
+        <RouterLink to="/sobremesa" class="icone local">
           <img src="/menulateral/sundy.png" />
         </RouterLink>
       </nav>
     </aside>
 
     <main class="conteudo">
-      <h1 class="titulo">HOT DOGS</h1>
+      <h1 class="titulo">SOBREMESAS</h1>
       <ul class="grid-produtos">
         <li
           v-for="item in productsStore.sobremesas"
           :key="item.id"
           class="produto"
-          @click="cartStore.addToCart(item)"
+          @click="abrirModal(item)"
         >
           <img :src="item.cover" />
           <p class="nome">{{ item.title }}</p>
           <p class="preco">R$ {{ item.price }}</p>
         </li>
+        <ProductModal
+          v-if="mostrarModal"
+          :produto="produtoSelecionado"
+          @fechar="mostrarModal = false"
+          @adicionar="adicionarAoCarrinho"
+        />
       </ul>
     </main>
 
@@ -107,8 +127,14 @@ const cartStore = useCartStore()
   transition: transform 0.3s;
 }
 
-.icone.ativo {
+.icone.local {
   background-color: #e94444;
+  padding: 0.5rem;
+  border-radius: 8px;
+}
+
+.icone.ativo {
+  background-color: #d6cece;
   padding: 0.5rem;
   border-radius: 8px;
 }

@@ -1,10 +1,24 @@
 <script setup>
-import { RouterLink } from 'vue-router'
-import { useProductStore } from '../../stores/produtos'
-import { useCartStore } from '../../stores/carinho'
+import { ref } from 'vue'
+import { useProductStore } from '@/stores/produtos'
+import { useCartStore } from '@/stores/carinho'
+import ProductModal from '@/components/ProductModal.vue'
 
 const productsStore = useProductStore()
 const cartStore = useCartStore()
+
+const produtoSelecionado = ref(null)
+const mostrarModal = ref(false)
+
+function abrirModal(produto) {
+  produtoSelecionado.value = produto
+  mostrarModal.value = true
+}
+
+function adicionarAoCarrinho(produto) {
+  cartStore.addToCart(produto)
+  mostrarModal.value = false
+}
 </script>
 
 <template>
@@ -18,7 +32,7 @@ const cartStore = useCartStore()
         <RouterLink to="/humburger" class="icone ativo">
           <img src="/menulateral/humb.png" />
         </RouterLink>
-        <RouterLink to="/batata" class="icone ativo">
+        <RouterLink to="/batata" class="icone local">
           <img src="/menulateral/batata.png" />
         </RouterLink>
         <RouterLink to="/cachorro" class="icone ativo">
@@ -40,12 +54,18 @@ const cartStore = useCartStore()
           v-for="item in productsStore.batatas"
           :key="item.id"
           class="produto"
-          @click="cartStore.addToCart(item)"
+          @click="abrirModal(item)"
         >
           <img :src="item.cover" />
           <p class="nome">{{ item.title }}</p>
           <p class="preco">R$ {{ item.price }}</p>
         </li>
+        <ProductModal
+          v-if="mostrarModal"
+          :produto="produtoSelecionado"
+          @fechar="mostrarModal = false"
+          @adicionar="adicionarAoCarrinho"
+        />
       </ul>
     </main>
 
@@ -107,8 +127,14 @@ const cartStore = useCartStore()
   transition: transform 0.3s;
 }
 
-.icone.ativo {
+.icone.local {
   background-color: #e94444;
+  padding: 0.5rem;
+  border-radius: 8px;
+}
+
+.icone.ativo {
+  background-color: #d6cece;
   padding: 0.5rem;
   border-radius: 8px;
 }
