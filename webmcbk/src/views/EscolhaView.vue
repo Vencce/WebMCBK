@@ -60,7 +60,7 @@ main div.escolha button {
 }
 
 main div.escolha button p {
-  font-size: 1.2rem;
+  font-size: 2.2rem;
   padding: 10px 0;
 }
 
@@ -73,7 +73,7 @@ main .escolha {
 }
 
 img {
-  width: 10rem;
-  height: 10rem;
+  width: 20rem;
+  height: 20rem;
 }
 </style>
